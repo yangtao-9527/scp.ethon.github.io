@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>📜 服务器规则 - RICE 基金会设施</title>
-    <!-- 使用你原有的 style.css，并在后面追加新样式，或者直接复制下面的 style 块 -->
     <style>
         /* ========== 全局样式 ========== */
         * {
@@ -115,12 +114,18 @@
             transition: all 0.2s;
             font-weight: 450;
             border-left: 3px solid transparent;
+            cursor: pointer;
         }
         .doc-sidebar a:hover {
             background: #fef5e7;
             border-left-color: #e67e22;
             color: #e67e22;
             transform: translateX(5px);
+        }
+        .doc-sidebar a.active {
+            background: #e67e22;
+            color: white;
+            border-left-color: #c95f0f;
         }
         /* 右侧内容区 */
         .doc-content {
@@ -131,30 +136,22 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.05);
             border: 1px solid rgba(0,0,0,0.02);
         }
-        /* 内容标题 */
-        .doc-content h2 {
+        .content-block {
+            display: none;
+        }
+        .content-block.active {
+            display: block;
+        }
+        .content-block h2 {
             font-size: 2rem;
-            margin: 2rem 0 1.2rem 0;
+            margin: 0 0 1.2rem 0;
             color: #1e2a3a;
             display: flex;
             align-items: center;
             gap: 12px;
             border-bottom: 2px dashed #ddd;
             padding-bottom: 0.6rem;
-            scroll-margin-top: 110px; /* 防止被导航栏遮挡 */
         }
-        .doc-content h2:first-of-type {
-            margin-top: 0;
-        }
-        /* 给不同标题加图标（可选） */
-        #intro::before { content: "📌"; margin-right: 10px; }
-        #vip::before { content: "⭐"; margin-right: 10px; }
-        #special::before { content: "⚠️"; margin-right: 10px; }
-        #civil-war::before { content: "⚔️"; margin-right: 10px; }
-        #rule-changes::before { content: "📝"; margin-right: 10px; }
-        #others::before { content: "🔔"; margin-right: 10px; }
-
-        /* 规则列表美化 */
         .rule-list {
             list-style: none;
             margin: 1.5rem 0;
@@ -172,12 +169,17 @@
             background: #fff5e6;
             transform: translateX(4px);
         }
-        /* 普通段落 */
-        .doc-content p {
-            color: #33475b;
-            margin: 1rem 0;
+        .vip-price {
+            background: #f0f7ff;
+            border-left: 6px solid #3498db;
         }
-        /* 脚注 */
+        .notice {
+            background: #fff3cd;
+            border-left: 6px solid #ffc107;
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            margin-top: 1rem;
+        }
         footer {
             text-align: center;
             padding: 2rem;
@@ -190,8 +192,6 @@
             color: #e67e22;
             font-weight: 500;
         }
-
-        /* 响应式 */
         @media (max-width: 900px) {
             .doc-container {
                 flex-direction: column;
@@ -220,6 +220,11 @@
                 transform: translateY(-2px);
                 border-bottom-color: #e67e22;
             }
+            .doc-sidebar a.active {
+                border-bottom-color: #e67e22;
+                background: #e67e22;
+                color: white;
+            }
             header h1 {
                 font-size: 2rem;
             }
@@ -231,10 +236,6 @@
             .rule-list li {
                 padding: 0.8rem 1rem;
             }
-        }
-        /* 平滑滚动 */
-        html {
-            scroll-behavior: smooth;
         }
     </style>
 </head>
@@ -255,71 +256,132 @@
         <aside class="doc-sidebar">
             <h3>文档目录</h3>
             <ul>
-                <li><a href="#intro">新人必读 / 常见问题</a></li>
-                <li><a href="#vip">VIP 相关</a></li>
-                <li><a href="#special">特殊规则</a></li>
-                <li><a href="#civil-war">内战服专属规则</a></li>
-                <li><a href="#rule-changes">规则改动具体信息</a></li>
-                <li><a href="#others">其他重要提醒</a></li>
+                <li><a class="tab-link active" data-tab="intro">新人必读 / 常见问题</a></li>
+                <li><a class="tab-link" data-tab="vip">VIP 相关</a></li>
+                <li><a class="tab-link" data-tab="special">特殊规则</a></li>
+                <li><a class="tab-link" data-tab="civil-war">内战服专属规则</a></li>
+                <li><a class="tab-link" data-tab="rule-changes">规则改动具体信息</a></li>
+                <li><a class="tab-link" data-tab="others">其他重要提醒</a></li>
             </ul>
         </aside>
 
         <!-- 右侧内容 -->
         <main class="doc-content">
-            <h2 id="intro">新人必读 / 常见问题</h2>
-            <p>📌 刚加入服务器？这里有你需要知道的一切：</p>
-            <ul class="rule-list">
-                <li><strong>如何进入服务器？</strong> 打开GMod，按~打开控制台，输入 <code>connect scp.ethon.wiki</code> 即可直连。</li>
-                <li><strong>为什么会被踢出？</strong> 可能是由于网络波动、服务器满员或违反规则。请先查看规则，如无违规可尝试重连。</li>
-                <li><strong>如何举报玩家？</strong> 按F1打开菜单，选择举报并附上截图/录屏，或在QQ群联系管理员。</li>
-                <li><strong>服务器有内鬼吗？</strong> 没有内鬼，但请警惕拱火群体，遇到问题及时联系管理。</li>
-            </ul>
+            <!-- 新人必读 / 常见问题 -->
+            <div id="intro" class="content-block active">
+                <h2>新人必读 / 常见问题</h2>
+                <ul class="rule-list">
+                    <li><strong>游戏内大量紫黑红色错误/missingmap怎么办？</strong><br>
+                    订阅服务器创意工坊合集：<br>
+                    <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3433592573" target="_blank">合集1</a><br>
+                    <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3432895930" target="_blank">合集2</a><br>
+                    <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=343289593" target="_blank">合集3</a>
+                    </li>
+                    <li><strong>玩过一次之后列表看不见怎么办？</strong><br>
+                    按ESC下面的按键一键打开控制台，输入 <code>connect 202.189.12.153:27015</code> 可以直接连服务器。
+                    </li>
+                    <li><strong>不太了解规则，怕违规怎么办？</strong><br>
+                    规则看这里：<a href="#civil-war" onclick="switchTab('civil-war')">内战服专属规则</a>、<a href="#special" onclick="switchTab('special')">特殊规则</a>等。
+                    </li>
+                    <li><strong>想要反馈一些bug或者是别的东西，刚好技术/服主不在线怎么办？</strong><br>
+                    有意见可按照格式在表格内反馈，会定期查看。
+                    </li>
+                    <li><strong>我完全不会玩，不知道该做什么怎么办？</strong><br>
+                    可以询问游戏内队友或是在群内询问群友，会有热心群友为你解答。
+                    </li>
+                    <li><strong>游戏经常崩溃怎么办？</strong><br>
+                    首先在Steam库内右键你的GMOD，选择属性 → 测试版，切换至 <code>64位</code>。
+                    </li>
+                    <li><strong>总是连接丢失怎么办？</strong><br>
+                    可能有很多问题导致，可以尝试关闭加速器、关闭翻墙软件等尝试解决，如果还不能解决请等待我们给出更好的方案。
+                    </li>
+                </ul>
+                <div class="notice">
+                    <strong>注意事项：</strong> 所有规则、玩家介绍等都有可能会有漏洞，但若有玩家恶意通过钻规则漏洞进行逃避惩罚等论棍或钻牛角尖行为，我们会给予该玩家包括但不限于警告、ban出服务器等惩罚。
+                </div>
+            </div>
 
-            <h2 id="vip">VIP 相关</h2>
-            <p>⭐ VIP 权益与说明：</p>
-            <ul class="rule-list">
-                <li>VIP 玩家可获得专属定制模型（仅限基金会军事单位使用）。</li>
-                <li>VIP 享有优先进入权限（服务器满员时可优先挤入）。</li>
-                <li>VIP 申请方式：联系管理组或关注群内公告。</li>
-                <li><span style="color:#c0392b;">注意：</span>VIP 不意味着违反规则可以免罚，违规同样处理。</li>
-            </ul>
+            <!-- VIP 相关 -->
+            <div id="vip" class="content-block">
+                <h2>VIP 相关</h2>
+                <ul class="rule-list">
+                    <li class="vip-price"><strong>单次购买：</strong>30元/月</li>
+                    <li class="vip-price"><strong>一次性连续购买超过三个月：</strong>25元/月</li>
+                </ul>
+                <p><strong>VIP目前特殊权限：</strong></p>
+                <ul class="rule-list">
+                    <li>双倍经验获取</li>
+                    <li>SCP自选</li>
+                    <li>自选名字颜色</li>
+                    <li>DD特殊皮肤</li>
+                    <li>后续仍会添加其他功能，敬请期待</li>
+                </ul>
+                <p><strong>头衔相关：</strong></p>
+                <ul class="rule-list">
+                    <li>普通单色头衔：25元</li>
+                    <li>特殊自定义头衔：35元</li>
+                    <li>头衔在激活当天不满意可改，一旦激活永久有效。</li>
+                </ul>
+                <p><strong>特殊自定义头衔：</strong>自定义头衔代表可自定义样式，包括渐变、彩虹、图片等，如果有别的想做的效果也可以和我讨论。</p>
+                <p>示例：</p>
+                <ul style="margin-left: 2rem;">
+                    <li>从来没有觉得写代码开心过</li>
+                    <li>世界第一的AnonTokyo</li>
+                    <li>RiceMCUT</li>
+                </ul>
+            </div>
 
-            <h2 id="special">特殊规则</h2>
-            <ul class="rule-list">
-                <li><strong>对管理员：</strong>定制模型只能适用于基金会军事单位使用，使用别的阵营被发现将会被收回使用权。</li>
-                <li><strong>以后小饭堂服务器不再接受玩家定制。</strong> （注：此处为示例规则，可根据实际修改）</li>
-                <li>警惕周围性压抑与拱火群体，他们高概率是伪人。</li>
-                <li>pg和饭堂依旧是一家人，警惕想搞事的傻逼。</li>
-                <li>遇到有人拱火且群里明显吵起来请及时呼叫拉菲或者管理，不要问发生什么事了，bro们容易被带偏。</li>
-                <li>若发现性压抑沸羊羊成群结队冲锋，请玩家自行组织防线提防搞事群。</li>
-                <li><strong style="color:#c0392b;">使用二次元皮肤并让模型改成裸体会直接永ban处理。</strong></li>
-                <li>宣传虚假规则将会不开展直接上警告，玩家可举报宣传虚假规则者，需带有录屏然后扣举报，写明谁谁谁。</li>
-            </ul>
+            <!-- 特殊规则 -->
+            <div id="special" class="content-block">
+                <h2>特殊规则</h2>
+                <ul class="rule-list">
+                    <li><strong>对管理员：</strong>定制模型只能适用于基金会军事单位使用，使用别的阵营被发现将会被收回使用权。</li>
+                    <li>以后小饭堂服务器不再接受玩家定制。</li>
+                    <li>警惕周围性压抑与拱火群体，他们高概率是伪人。</li>
+                    <li>pg和饭堂依旧是一家人，警惕想搞事的傻逼。</li>
+                    <li>遇到有人拱火且群里明显吵起来请及时呼叫拉菲或者管理，不要问发生什么事了，bro们容易被带偏。</li>
+                    <li>若发现性压抑沸羊羊成群结队冲锋，请玩家自行组织防线提防搞事群。</li>
+                    <li><strong style="color:#c0392b;">使用二次元皮肤并让模型改成裸体会直接永ban处理。</strong></li>
+                    <li>宣传虚假规则将会不开展直接上警告，玩家可举报宣传虚假规则者，需带有录屏然后扣举报，写明谁谁谁。</li>
+                </ul>
+            </div>
 
-            <h2 id="civil-war">内战服专属规则</h2>
-            <p>⚔️ 内战服额外规则：</p>
-            <ul class="rule-list">
-                <li>内战服允许基金会内斗，但不得恶意利用BUG刷分。</li>
-                <li>禁止在内战服使用外挂或第三方辅助软件。</li>
-                <li>具体规则请以服务器内提示为准。</li>
-            </ul>
+            <!-- 内战服专属规则 -->
+            <div id="civil-war" class="content-block">
+                <h2>内战服专属规则</h2>
+                <ol class="rule-list" style="list-style: decimal; padding-left: 2rem;">
+                    <li>禁止出生平台打架、招募、抢电梯等行为（出生平台和电梯禁止长时间逗留，优先进入电梯的阵营可以击杀后进来的非友好阵营）。</li>
+                    <li>支援平台上下禁止交火。</li>
+                    <li>禁止通过射击他人来判断是否为己方阵营。</li>
+                    <li>所有阵营需完成阵营任务为优先目标。</li>
+                    <li>猩红开启仪式需除蛇手和scp之外的阵营前往阻止。</li>
+                    <li>禁止向电梯内、支援平台上下和撤离点使用任何爆炸物（不包括闪光弹，混沌分裂者使用pg炸毁直升机或基金会武装使用pg炸毁装甲车是被允许的）。</li>
+                    <li>禁止敌对阵营合作。</li>
+                    <li>当刷新GRU时，斯大林小队编为格鲁乌阵营。</li>
+                </ol>
+            </div>
 
-            <h2 id="rule-changes">规则改动具体信息</h2>
-            <p>📝 近期规则更新记录：</p>
-            <ul class="rule-list">
-                <li><strong>2025-02-16：</strong>增加关于裸体皮肤的处罚说明，明确永久封禁。</li>
-                <li><strong>2025-02-10：</strong>调整VIP模型使用范围，仅限基金会军事单位。</li>
-                <li><strong>2025-02-01：</strong>明确举报虚假规则的处理流程。</li>
-            </ul>
+            <!-- 规则改动具体信息 -->
+            <div id="rule-changes" class="content-block">
+                <h2>规则改动具体信息</h2>
+                <ul class="rule-list">
+                    <li><strong>2025-02-16：</strong>增加关于裸体皮肤的处罚说明，明确永久封禁。</li>
+                    <li><strong>2025-02-10：</strong>调整VIP模型使用范围，仅限基金会军事单位。</li>
+                    <li><strong>2025-02-01：</strong>明确举报虚假规则的处理流程。</li>
+                    <!-- 可以根据实际补充更多改动 -->
+                </ul>
+            </div>
 
-            <h2 id="others">其他重要提醒</h2>
-            <p>🔔 玩家须知：</p>
-            <ul class="rule-list">
-                <li>管理团队QQ群：123456789（请备注游戏ID）</li>
-                <li>申诉或建议请发送邮件至 <a href="mailto:admin@rice.cn">admin@rice.cn</a></li>
-                <li>请勿在公屏刷屏、骂人、宣传其他服务器。</li>
-                <li>遇到无法解决的问题，截图保留证据并@在线管理。</li>
-            </ul>
+            <!-- 其他重要提醒 -->
+            <div id="others" class="content-block">
+                <h2>其他重要提醒</h2>
+                <ul class="rule-list">
+                    <li>管理团队QQ群：123456789（请备注游戏ID）</li>
+                    <li>申诉或建议请发送邮件至 <a href="mailto:admin@rice.cn">admin@rice.cn</a></li>
+                    <li>请勿在公屏刷屏、骂人、宣传其他服务器。</li>
+                    <li>遇到无法解决的问题，截图保留证据并@在线管理。</li>
+                </ul>
+            </div>
         </main>
     </div>
 
@@ -327,5 +389,38 @@
         <p>&copy; 2025 RICE 社区. 遵循 <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a> 协议</p>
         <p style="margin-top: 0.5rem; font-size: 0.9rem;">服务器IP: <code>scp.ethon.wiki</code> | 直连即可</p>
     </footer>
+
+    <script>
+        (function() {
+            const tabLinks = document.querySelectorAll('.tab-link');
+            const contentBlocks = document.querySelectorAll('.content-block');
+
+            function switchTab(tabId) {
+                contentBlocks.forEach(block => block.classList.remove('active'));
+                const activeBlock = document.getElementById(tabId);
+                if (activeBlock) activeBlock.classList.add('active');
+
+                tabLinks.forEach(link => link.classList.remove('active'));
+                const activeLink = document.querySelector(`.tab-link[data-tab="${tabId}"]`);
+                if (activeLink) activeLink.classList.add('active');
+            }
+
+            tabLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const tabId = this.getAttribute('data-tab');
+                    switchTab(tabId);
+                });
+            });
+
+            // 如果URL中有hash（如 #civil-war），自动切换到对应板块
+            if (window.location.hash) {
+                const hash = window.location.hash.substring(1); // 去掉 #
+                if (document.getElementById(hash)) {
+                    switchTab(hash);
+                }
+            }
+        })();
+    </script>
 </body>
 </html>
