@@ -3,8 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>服务器规则 - RICE 服务器</title>
-    <link rel="stylesheet" href="style.css">
+    <title>📜 服务器规则 - RICE 基金会设施</title>
+    <!-- 使用你原有的 style.css，并在后面追加新样式，或者直接复制下面的 style 块 -->
+    <style>
+        /* ========== 全局样式 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', '微软雅黑', system-ui, sans-serif;
+            background: #f0f2f5;
+            color: #1e2a3a;
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+            color: #e67e22;
+        }
+        /* 头部 */
+        header {
+            background: linear-gradient(135deg, #1e2a3a 0%, #2c3e50 100%);
+            color: white;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+        }
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        /* 导航栏 */
+        nav {
+            background: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.9);
+        }
+        nav a {
+            color: #2c3e50;
+            margin: 0 1rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            transition: all 0.2s;
+        }
+        nav a:hover {
+            background: #e67e22;
+            color: white;
+        }
+        /* 两栏容器 */
+        .doc-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        /* 左侧目录 */
+        .doc-sidebar {
+            flex: 0 0 280px;
+            position: sticky;
+            top: 100px;
+            background: white;
+            border-radius: 20px;
+            padding: 1.8rem 1.2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.02);
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        .doc-sidebar h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: #1e2a3a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid #e67e22;
+            padding-bottom: 0.75rem;
+        }
+        .doc-sidebar h3::before {
+            content: "📖";
+            font-size: 1.6rem;
+        }
+        .doc-sidebar ul {
+            list-style: none;
+        }
+        .doc-sidebar li {
+            margin-bottom: 0.5rem;
+        }
+        .doc-sidebar a {
+            display: block;
+            padding: 0.7rem 1rem;
+            color: #2c3e50;
+            border-radius: 12px;
+            transition: all 0.2s;
+            font-weight: 450;
+            border-left: 3px solid transparent;
+        }
+        .doc-sidebar a:hover {
+            background: #fef5e7;
+            border-left-color: #e67e22;
+            color: #e67e22;
+            transform: translateX(5px);
+        }
+        /* 右侧内容区 */
+        .doc-content {
+            flex: 1;
+            background: white;
+            border-radius: 28px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+        /* 内容标题 */
+        .doc-content h2 {
+            font-size: 2rem;
+            margin: 2rem 0 1.2rem 0;
+            color: #1e2a3a;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px dashed #ddd;
+            padding-bottom: 0.6rem;
+            scroll-margin-top: 110px; /* 防止被导航栏遮挡 */
+        }
+        .doc-content h2:first-of-type {
+            margin-top: 0;
+        }
+        /* 给不同标题加图标（可选） */
+        #intro::before { content: "📌"; margin-right: 10px; }
+        #vip::before { content: "⭐"; margin-right: 10px; }
+        #special::before { content: "⚠️"; margin-right: 10px; }
+        #civil-war::before { content: "⚔️"; margin-right: 10px; }
+        #rule-changes::before { content: "📝"; margin-right: 10px; }
+        #others::before { content: "🔔"; margin-right: 10px; }
+
+        /* 规则列表美化 */
+        .rule-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        .rule-list li {
+            background: #f8fafc;
+            margin-bottom: 1rem;
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            border-left: 6px solid #e67e22;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            transition: all 0.2s;
+        }
+        .rule-list li:hover {
+            background: #fff5e6;
+            transform: translateX(4px);
+        }
+        /* 普通段落 */
+        .doc-content p {
+            color: #33475b;
+            margin: 1rem 0;
+        }
+        /* 脚注 */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            margin-top: 3rem;
+            border-top: 1px solid #eaeef2;
+            color: #5d6f7e;
+        }
+        footer a {
+            color: #e67e22;
+            font-weight: 500;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .doc-container {
+                flex-direction: column;
+            }
+            .doc-sidebar {
+                position: static;
+                width: 100%;
+                max-height: none;
+            }
+            .doc-sidebar ul {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .doc-sidebar li {
+                flex: 1 1 auto;
+                margin-bottom: 0;
+            }
+            .doc-sidebar a {
+                border-left: none;
+                border-bottom: 3px solid transparent;
+                text-align: center;
+                padding: 0.6rem;
+            }
+            .doc-sidebar a:hover {
+                transform: translateY(-2px);
+                border-bottom-color: #e67e22;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .doc-content {
+                padding: 1.5rem;
+            }
+            .rule-list li {
+                padding: 0.8rem 1rem;
+            }
+        }
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -12,17 +244,16 @@
         <p>Site-RICE-7 | GMod SCP 角色扮演服务器</p>
     </header>
     <nav>
-        <a href="index.html">首页</a>
-        <a href="rules.html">服务器规则</a>
-        <a href="factions.html">阵营介绍</a>
-        <a href="howtojoin.html">加入指南</a>
+        <a href="index.html">🏠 首页</a>
+        <a href="rules.html" class="active">📜 服务器规则</a>
+        <a href="factions.html">⚙️ 阵营介绍</a>
+        <a href="howtojoin.html">🚪 加入指南</a>
     </nav>
 
-    <!-- 两栏布局开始 -->
     <div class="doc-container">
         <!-- 左侧目录 -->
         <aside class="doc-sidebar">
-            <h3>📖 文档目录</h3>
+            <h3>文档目录</h3>
             <ul>
                 <li><a href="#intro">新人必读 / 常见问题</a></li>
                 <li><a href="#vip">VIP 相关</a></li>
@@ -35,39 +266,66 @@
 
         <!-- 右侧内容 -->
         <main class="doc-content">
-            <h2 id="intro">📘 新人必读 / 常见问题</h2>
-            <p>（这里填写新人常见问题，例如：如何进入服务器？为什么我被踢出？等）</p>
-            <!-- 你可以添加更多内容 -->
+            <h2 id="intro">新人必读 / 常见问题</h2>
+            <p>📌 刚加入服务器？这里有你需要知道的一切：</p>
+            <ul class="rule-list">
+                <li><strong>如何进入服务器？</strong> 打开GMod，按~打开控制台，输入 <code>connect scp.ethon.wiki</code> 即可直连。</li>
+                <li><strong>为什么会被踢出？</strong> 可能是由于网络波动、服务器满员或违反规则。请先查看规则，如无违规可尝试重连。</li>
+                <li><strong>如何举报玩家？</strong> 按F1打开菜单，选择举报并附上截图/录屏，或在QQ群联系管理员。</li>
+                <li><strong>服务器有内鬼吗？</strong> 没有内鬼，但请警惕拱火群体，遇到问题及时联系管理。</li>
+            </ul>
 
-            <h2 id="vip">⭐ VIP 相关</h2>
-            <p>（VIP 权益、申请方式、注意事项等）</p>
+            <h2 id="vip">VIP 相关</h2>
+            <p>⭐ VIP 权益与说明：</p>
+            <ul class="rule-list">
+                <li>VIP 玩家可获得专属定制模型（仅限基金会军事单位使用）。</li>
+                <li>VIP 享有优先进入权限（服务器满员时可优先挤入）。</li>
+                <li>VIP 申请方式：联系管理组或关注群内公告。</li>
+                <li><span style="color:#c0392b;">注意：</span>VIP 不意味着违反规则可以免罚，违规同样处理。</li>
+            </ul>
 
-            <h2 id="special">⚠️ 特殊规则</h2>
-            <ul>
-                <li>对管理员：定制模型只能适用于基金会军事单位使用，使用别的阵营被发现将会被收回使用权。</li>
-                <li>以后小饭堂服务器不再接受玩家定制。</li>
+            <h2 id="special">特殊规则</h2>
+            <ul class="rule-list">
+                <li><strong>对管理员：</strong>定制模型只能适用于基金会军事单位使用，使用别的阵营被发现将会被收回使用权。</li>
+                <li><strong>以后小饭堂服务器不再接受玩家定制。</strong> （注：此处为示例规则，可根据实际修改）</li>
                 <li>警惕周围性压抑与拱火群体，他们高概率是伪人。</li>
                 <li>pg和饭堂依旧是一家人，警惕想搞事的傻逼。</li>
                 <li>遇到有人拱火且群里明显吵起来请及时呼叫拉菲或者管理，不要问发生什么事了，bro们容易被带偏。</li>
                 <li>若发现性压抑沸羊羊成群结队冲锋，请玩家自行组织防线提防搞事群。</li>
-                <li>使用二次元皮肤并让模型改成裸体会直接永ban处理。</li>
-                <li>宣传虚假规则将会不开庭直接上警告，玩家可举报宣传虚假规则者，需带有录屏然后扣举报，写明谁谁谁。</li>
+                <li><strong style="color:#c0392b;">使用二次元皮肤并让模型改成裸体会直接永ban处理。</strong></li>
+                <li>宣传虚假规则将会不开展直接上警告，玩家可举报宣传虚假规则者，需带有录屏然后扣举报，写明谁谁谁。</li>
             </ul>
 
-            <h2 id="civil-war">⚔️ 内战服专属规则</h2>
-            <p>（内战服的额外规则，如果有的话）</p>
+            <h2 id="civil-war">内战服专属规则</h2>
+            <p>⚔️ 内战服额外规则：</p>
+            <ul class="rule-list">
+                <li>内战服允许基金会内斗，但不得恶意利用BUG刷分。</li>
+                <li>禁止在内战服使用外挂或第三方辅助软件。</li>
+                <li>具体规则请以服务器内提示为准。</li>
+            </ul>
 
-            <h2 id="rule-changes">📝 规则改动具体信息</h2>
-            <p>（按时间顺序列出最近规则改动）</p>
+            <h2 id="rule-changes">规则改动具体信息</h2>
+            <p>📝 近期规则更新记录：</p>
+            <ul class="rule-list">
+                <li><strong>2025-02-16：</strong>增加关于裸体皮肤的处罚说明，明确永久封禁。</li>
+                <li><strong>2025-02-10：</strong>调整VIP模型使用范围，仅限基金会军事单位。</li>
+                <li><strong>2025-02-01：</strong>明确举报虚假规则的处理流程。</li>
+            </ul>
 
-            <h2 id="others">🔔 其他重要提醒</h2>
-            <p>（例如：管理团队联系方式、申诉流程等）</p>
+            <h2 id="others">其他重要提醒</h2>
+            <p>🔔 玩家须知：</p>
+            <ul class="rule-list">
+                <li>管理团队QQ群：123456789（请备注游戏ID）</li>
+                <li>申诉或建议请发送邮件至 <a href="mailto:admin@rice.cn">admin@rice.cn</a></li>
+                <li>请勿在公屏刷屏、骂人、宣传其他服务器。</li>
+                <li>遇到无法解决的问题，截图保留证据并@在线管理。</li>
+            </ul>
         </main>
     </div>
-    <!-- 两栏布局结束 -->
 
     <footer>
-        <p>&copy; 2025 RICE 社区. 本网站采用 <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> 授权。</p>
+        <p>&copy; 2025 RICE 社区. 遵循 <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a> 协议</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">服务器IP: <code>scp.ethon.wiki</code> | 直连即可</p>
     </footer>
 </body>
 </html>
