@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚙️ 阵营介绍 - RICE 基金会设施</title>
+    <style>
+        /* ========== 全局样式 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', '微软雅黑', system-ui, sans-serif;
+            background: #f0f2f5;
+            color: #1e2a3a;
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+            color: #e67e22;
+        }
+        header {
+            background: linear-gradient(135deg, #1e2a3a 0%, #2c3e50 100%);
+            color: white;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+        }
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        nav {
+            background: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.9);
+        }
+        nav a {
+            color: #2c3e50;
+            margin: 0 0.5rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+        nav a:hover, nav a.active {
+            background: #e67e22;
+            color: white;
+        }
+        /* 两栏容器 */
+        。doc-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        /* 左侧目录 */
+        .doc-sidebar {
+            flex: 0 0 280px;
+            position: sticky;
+            top: 100px;
+            background: white;
+            border-radius: 20px;
+            padding: 1.8rem 1.2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.02);
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        .doc-sidebar h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: #1e2a3a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid #e67e22;
+            padding-bottom: 0.75rem;
+        }
+        .doc-sidebar h3::before {
+            content: "📖";
+            font-size: 1.6rem;
+        }
+        .doc-sidebar ul {
+            list-style: none;
+        }
+        .doc-sidebar li {
+            margin-bottom: 0.5rem;
+        }
+        .doc-sidebar a {
+            display: block;
+            padding: 0.7rem 1rem;
+            color: #2c3e50;
+            border-radius: 12px;
+            transition: all 0.2s;
+            font-weight: 450;
+            border-left: 3px solid transparent;
+            cursor: pointer;
+        }
+        .doc-sidebar a:hover {
+            background: #fef5e7;
+            border-left-color: #e67e22;
+            color: #e67e22;
+            transform: translateX(5px);
+        }
+        .doc-sidebar a.active {
+            background: #e67e22;
+            color: white;
+            border-left-color: #c95f0f;
+        }
+        /* 右侧内容区 */
+        .doc-content {
+            flex: 1;
+            background: white;
+            border-radius: 28px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+        .content-block {
+            display: none;
+        }
+        .content-block.active {
+            display: block;
+        }
+        .content-block h2 {
+            font-size: 2rem;
+            margin: 0 0 1.2rem 0;
+            color: #1e2a3a;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px dashed #ddd;
+            padding-bottom: 0.6rem;
+        }
+        /* 角色卡片样式 */
+        .character-card {
+            background: #f8fafc;
+            margin-bottom: 1.5rem;
+            padding: 1.2rem 1.5rem;
+            border-radius: 20px;
+            border-left: 6px solid #e67e22;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: all 0.2s;
+        }
+        .character-card:hover {
+            background: #fff5e6;
+            transform: translateX(4px);
+        }
+        .character-card h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .character-card h3::before {
+            content: "👤";
+            font-size: 1.2rem;
+            color: #e67e22;
+        }
+        .character-card p {
+            margin: 0.2rem 0;
+            color: #33475b;
+        }
+        .character-card .note {
+            color: #e67e22;
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            margin-top: 3rem;
+            border-top: 1px solid #eaeef2;
+            color: #5d6f7e;
+        }
+        footer a {
+            color: #e67e22;
+            font-weight: 500;
+        }
+        @media (max-width: 900px) {
+            .doc-container {
+                flex-direction: column;
+            }
+            .doc-sidebar {
+                position: static;
+                width: 100%;
+                max-height: none;
+            }
+            .doc-sidebar ul {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .doc-sidebar li {
+                flex: 1 1 auto;
+                margin-bottom: 0;
+            }
+            .doc-sidebar a {
+                border-left: none;
+                border-bottom: 3px solid transparent;
+                text-align: center;
+                padding: 0.6rem;
+            }
+            .doc-sidebar a:hover {
+                transform: translateY(-2px);
+                border-bottom-color: #e67e22;
+            }
+            .doc-sidebar a.active {
+                border-bottom-color: #e67e22;
+                background: #e67e22;
+                color: white;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .doc-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>RICE 基金会设施</h1>
+        <p>Site-RICE-7 | GMod SCP 角色扮演服务器</p>
+    </header>
+    <nav>
+        <a href="index.html">🏠 首页</a>
+        <a href="rules.html">📜 服务器规则</a>
+        <a href="factions.html" class="active">⚙️ 阵营介绍</a>
+        <a href="howtojoin.html">🚪 加入指南</a>
+    </nav>
+
+    <div class="doc-container">
+        <!-- 左侧目录 -->
+        <aside class="doc-sidebar">
+            <h3>阵营目录</h3>
+            <ul>
+                <li><a class="tab-link active" data-tab="dclass">D级人员</a></li>
+                <li><a class="tab-link" data-tab="science">科研部门</a></li>
+                <li><a class="tab-link" data-tab="special-science">特殊科研部门</a></li>
+                <li><a class="tab-link" data-tab="security">安保部门</a></li>
+                <li><a class="tab-link" data-tab="mtf">机动特遣队 MTF</a></li>
+                <li><a class="tab-link" data-tab="qrf">快速反应部队 QRF</a></li>
+                <!-- 后续可添加更多阵营 -->
+            </ul>
+        </aside>
+
+        <!-- 右侧内容区 -->
+        <main class="doc-content">
+            <!-- D级人员区块 -->
+            <div id="dclass" class="content-block active">
+                <h2>D级阵营</h2>
+                <p>任务目标：逃离设施</p>
+                <p>类似模型包含以下人物：</p>
+
+                <div class="character-card">
+                    <h3>D级人员盗贼</h3>
+                    <p>螺丝刀拧检查点窗户速度更快</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>D级人员大兜哥</h3>
+                    <p>背包多一格空间，可搜索垃圾桶</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>D级人员食人魔</h3>
+                    <p>可以吃户体增加血量</p>
+                    <div class="note">注：原文“户体”可能为“尸体”</div>
+                </div>
+
+                <div class="character-card">
+                    <h3>D级人员运动员</h3>
+                    <p>可以切换跑步模式</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>D级人员杀手</h3>
+                    <p>无女模；拥有一把小刀</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>GOC间谍</h3>
+                    <p>无女模</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>D级人员切皮者</h3>
+                    <p>可以窃取尸体的衣服和皮肤</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>D级人员D-9341</h3>
+                    <p>无女模；存档，进入濒死时会回到存档位置并回复血量</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>D级人员实验题</h3>
+                    <p>无女模；每一段时间获得随机技能</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>D级人员药物滥用者</h3>
+                    <p>无女模；可以生成随机药剂</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>D级人员摔手</h3>
+                    <p>技能为举起面前的人物并猝死（俗称肘击）</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>D级人员黑客</h3>
+                    <p>拥有黑客装置，可以黑入所有权限门</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>D级人员胖逼</h3>
+                    <p>吃汉堡回满血量</p>
+                </div>
+            </div>
+
+            <!-- 科研部门区块 -->
+            <div id="science" class="content-block">
+                <h2>科研部门</h2>
+                <p>任务目标：逃离设施</p>
+
+                <div class="character-card">
+                    <h3>科研助手</h3>
+                    <p>协助科研人员完成工作</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>科研人员</h3>
+                    <p>此模型包含蛇之手间谍</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>高级研究员</h3>
+                    <p>此模型包含UIU间谍、猩红传教士和安德森机器人间谍</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>清洁工</h3>
+                    <p>对着垃圾桶按E可以搜索垃圾桶</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>道德伦理检察官</h3>
+                    <p>可以招募两个D级为科研助手，可以使用电台呼叫律法</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>医生</h3>
+                    <p>（暂无详细描述）</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>SCP 4978-1</h3>
+                    <p>拥有强壮的肌肉，当按下技能时可以拳击，无法被D级人员摔跤手肘击</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>全球超自然联盟 心智部门-大使</h3>
+                    <p>需前往办公呼叫火花塞小组收容SCP</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>人事主管</h3>
+                    <p>可查验其他科研ID</p>
+                </div>
+            </div>
+
+            <!-- 特殊科研部门区块 -->
+            <div id="special-science" class="content-block">
+                <h2>特殊科研部门</h2>
+                <p>任务目标：逃离设施</p>
+
+                <div class="character-card">
+                    <h3>Matilda</h3>
+                    <p>技能：为周围友军单位恢复40血量</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>Speedwone</h3>
+                    <p>技能：让周围SCP减速</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>Hedwig</h3>
+                    <p>技能：透视SCP位置</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>Feelon</h3>
+                    <p>技能：放置反SCP地雷</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>Ruprecht</h3>
+                    <p>技能：隐身</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>Lomao</h3>
+                    <p>技能：加速周围队友移速</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>Shieldmeh</h3>
+                    <p>技能：开启范围防护装置保护队友和自己</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>Georg</h3>
+                    <p>技能：为周围队友提升抗性和移速</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>Kelen</h3>
+                    <p>技能：提升队友对SCP伤害（兼嘴臭攻击）</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>鱼博士</h3>
+                    <p>技能：周围生成补给品</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>Kondraki</h3>
+                    <p>技能：给自己加护盾；同时拥有一个相机可以让SCP原神启动；办公换装室可以拿专属武器。</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>Chronos Xiao</h3>
+                    <p>技能：使用周围时间静止，并提高自己移速；可在办公换装室拿自己专属武器。</p>
+                </div>
+            </div>
+
+            <!-- 安保部门区块 -->
+            <div id="security" class="content-block">
+                <h2>安保部门</h2>
+                <p>任务目标：逃出设施；保护科学家</p>
+
+                <div class="character-card">
+                    <h3>安保部门菜鸟</h3>
+                    <p>此模型包含ci间谍</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>安保部门警员</h3>
+                    <p>此模型包含ci间谍</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>安保部门 中士</h3>
+                    <p>（暂无详细描述）</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>安保部门突击队员</h3>
+                    <p>（暂无详细描述）</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>安保部门 镇暴队员</h3>
+                    <p>技能：增快移动速度和甩棍速度</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>安保部门 特别专员</h3>
+                    <p>此模型包含ci间谍</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>安保部门 mtf特派员</h3>
+                    <p>技能：瞬间缴械一个人，可透视附近scp位置</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>安保部门督察官</h3>
+                    <p>（暂无详细描述）</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>安保部门上尉</h3>
+                    <p>技能：给予所有安保一个短时间内加速</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>安保部门 典狱长</h3>
+                    <p>拥有电击器和电击枪两把传奇武器</p>
+                </div>
+            </div>
+
+            <!-- 机动特遣队 MTF 区块 -->
+            <div id="mtf" class="content-block">
+                <h2>MTF 机动特遣队</h2>
+                <p>任务目标：疏散科研；收容 scp；消灭 未知</p>
+
+                <div class="character-card">
+                    <h3>机动特遣队 突击队员</h3>
+                    <p>（暂无详细描述）</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>机动特遣队士兵</h3>
+                    <p>不建议扔掉自己的军事ID</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>机动特遣队 战斗专家</h3>
+                    <p>（暂无详细描述）</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>机动特遣队中尉</h3>
+                    <p>适合怯战</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>机动特遣队 医疗兵</h3>
+                    <p>（暂无详细描述）</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>机动特遣队安全主管</h3>
+                    <p>技能：为周围mtf单位临时增加移速和抗性</p>
+                    <p class="note">备注：我能不能大声说话！</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>机动特遣队设施主管</h3>
+                    <p>技能：开启奇术护盾，受到的伤害会让敌人也受伤</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>机动特遣队内部安全代理</h3>
+                    <p>技能：查验人员身份</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>机动特遣队 化学冰</h3>
+                    <p>免疫409，009，008和清收毒气</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>机动特遣队 工程兵</h3>
+                    <p>1440 最严厉的父亲<br>技能：放置反 scp炮台</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>机动特遣队重装</h3>
+                    <p>带上手环，打超人针后，你是设施最硬之人</p>
+                </div>
+            </div>
+
+            <!-- 快速反应部队 QRF 区块（新增） -->
+            <div id="qrf" class="content-block">
+                <h2>快速反应部队 QRF</h2>
+                <p>任务目标：疏散科研；消灭未知；收容 scp</p>
+
+                <div class="character-card">
+                    <h3>快速反应部队士兵</h3>
+                    <p>（暂无详细描述）</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>快速反应部队 精确射手</h3>
+                    <p>（暂无详细描述）</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>快速反应部队医疗兵</h3>
+                    <p>老登的第三条命</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>快速反应部队盾牌手</h3>
+                    <p>机制型选手</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>快速反应部队 机枪手</h3>
+                    <p>（暂无详细描述）</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>快速反应部队突击队员</h3>
+                    <p>（暂无详细描述）</p>
+                </div>
+
+                <div class="character-card">
+                    <h3>快速反应部队 指挥官</h3>
+                    <p>技能：无敌5秒钟</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 RICE 社区. 遵循 <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">CC BY-SA 3.0</a> 协议</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">服务器IP: <code>scp.ethon.wiki</code> | 直连即可</p>
+    </footer>
+
+    <script>
+        (function() {
+            const tabLinks = document.querySelectorAll('.tab-link');
+            const contentBlocks = document.querySelectorAll('.content-block');
+
+            function switchTab(tabId) {
+                contentBlocks.forEach(block => block.classList.remove('active'));
+                const activeBlock = document.getElementById(tabId);
+                if (activeBlock) activeBlock.classList.add('active');
+
+                tabLinks.forEach(link => link.classList.remove('active'));
+                const activeLink = document.querySelector(`.tab-link[data-tab="${tabId}"]`);
+                if (activeLink) activeLink.classList.add('active');
+            }
+
+            tabLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const tabId = this.getAttribute('data-tab');
+                    switchTab(tabId);
+                });
+            });
+
+            // 默认显示第一个区块（D级人员），已在HTML中设置active
+            // 如果URL中有hash，自动切换到对应板块
+            if (window.location.hash) {
+                const hash = window.location.hash.substring(1);
+                if (document.getElementById(hash)) {
+                    switchTab(hash);
+                }
+            }
+        })();
+    </script>
+</body>
+          </html>
