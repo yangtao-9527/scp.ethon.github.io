@@ -250,10 +250,16 @@
     </nav>
 
     <div class="doc-container">
-        <!-- 左侧目录（所有分类） -->
+        <!-- 左侧目录（包含所有分类） -->
         <aside class="doc-sidebar">
             <h3>规则合集</h3>
             <ul>
+                <!-- 新增的四个独立板块（放在最前面） -->
+                <li><a class="tab-link" data-tab="intro">新人必读/常见问题</a></li>
+                <li><a class="tab-link" data-tab="vip">VIP相关</a></li>
+                <li><a class="tab-link" data-tab="special">特殊规则</a></li>
+                <li><a class="tab-link" data-tab="civil-war">内战服专属规则</a></li>
+                <!-- 原有分类 -->
                 <li><a class="tab-link active" data-tab="main">主要规则</a></li>
                 <li><a class="tab-link" data-tab="report">举报与警告</a></li>
                 <li><a class="tab-link" data-tab="elevator">撤离点、电梯相关</a></li>
@@ -274,9 +280,103 @@
             </ul>
         </aside>
 
-        <!-- 右侧内容（所有区块，已填充规则） -->
+        <!-- 右侧内容 -->
         <main class="doc-content">
-            <!-- 主要规则 -->
+            <!-- 新人必读/常见问题（独立板块） -->
+            <div id="intro" class="content-block">
+                <h2>新人必读/常见问题</h2>
+                <ul class="rule-list">
+                    <li><strong>游戏内大量紫黑红色错误/missingmap怎么办？</strong><br>
+                    订阅服务器创意工坊合集：<br>
+                    <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3433592573" target="_blank">合集1</a><br>
+                    <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3432895930" target="_blank">合集2</a><br>
+                    <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=343289593" target="_blank">合集3</a>
+                    </li>
+                    <li><strong>玩过一次之后列表看不见怎么办？</strong><br>
+                    按ESC下面的按键一键打开控制台，输入 <code>connect 202.189.12.153:27015</code> 可以直接连服务器。
+                    </li>
+                    <li><strong>不太了解规则，怕违规怎么办？</strong><br>
+                    规则看这里：<a href="#civil-war" onclick="switchTab('civil-war')">内战服专属规则</a>、<a href="#special" onclick="switchTab('special')">特殊规则</a>等。
+                    </li>
+                    <li><strong>想要反馈一些bug或者是别的东西，刚好技术/服主不在线怎么办？</strong><br>
+                    有意见可按照格式在表格内反馈，会定期查看。
+                    </li>
+                    <li><strong>我完全不会玩，不知道该做什么怎么办？</strong><br>
+                    可以询问游戏内队友或是在群内询问群友，会有热心群友为你解答。
+                    </li>
+                    <li><strong>游戏经常崩溃怎么办？</strong><br>
+                    首先在Steam库内右键你的GMOD，选择属性 → 测试版，切换至 <code>64位</code>。
+                    </li>
+                    <li><strong>总是连接丢失怎么办？</strong><br>
+                    可能有很多问题导致，可以尝试关闭加速器、关闭翻墙软件等尝试解决，如果还不能解决请等待我们给出更好的方案。
+                    </li>
+                </ul>
+                <div class="rule-list alert">
+                    <li><strong>注意事项：</strong> 所有规则、玩家介绍等都有可能会有漏洞，但若有玩家恶意通过钻规则漏洞进行逃避惩罚等论棍或钻牛角尖行为，我们会给予该玩家包括但不限于警告、ban出服务器等惩罚。</li>
+                </div>
+            </div>
+
+            <!-- VIP相关（独立板块） -->
+            <div id="vip" class="content-block">
+                <h2>VIP相关</h2>
+                <ul class="rule-list">
+                    <li class="vip-price"><strong>单次购买：</strong>30元/月</li>
+                    <li class="vip-price"><strong>一次性连续购买超过三个月：</strong>25元/月</li>
+                </ul>
+                <p><strong>VIP目前特殊权限：</strong></p>
+                <ul class="rule-list">
+                    <li>双倍经验获取</li>
+                    <li>SCP自选</li>
+                    <li>自选名字颜色</li>
+                    <li>DD特殊皮肤</li>
+                    <li>后续仍会添加其他功能，敬请期待</li>
+                </ul>
+                <p><strong>头衔相关：</strong></p>
+                <ul class="rule-list">
+                    <li>普通单色头衔：25元</li>
+                    <li>特殊自定义头衔：35元</li>
+                    <li>头衔在激活当天不满意可改，一旦激活永久有效。</li>
+                </ul>
+                <p><strong>特殊自定义头衔：</strong>自定义头衔代表可自定义样式，包括渐变、彩虹、图片等，如果有别的想做的效果也可以和我讨论。</p>
+                <p>示例：</p>
+                <ul style="margin-left: 2rem;">
+                    <li>从来没有觉得写代码开心过</li>
+                    <li>世界第一的AnonTokyo</li>
+                    <li>RiceMCUT</li>
+                </ul>
+            </div>
+
+            <!-- 特殊规则（独立板块） -->
+            <div id="special" class="content-block">
+                <h2>特殊规则</h2>
+                <ul class="rule-list">
+                    <li><strong>对管理员：</strong>定制模型只能适用于基金会军事单位使用，使用别的阵营被发现将会被收回使用权。</li>
+                    <li>以后小饭堂服务器不再接受玩家定制。</li>
+                    <li>警惕周围性压抑与拱火群体，他们高概率是伪人。</li>
+                    <li>pg和饭堂依旧是一家人，警惕想搞事的傻逼。</li>
+                    <li>遇到有人拱火且群里明显吵起来请及时呼叫拉菲或者管理，不要问发生什么事了，bro们容易被带偏。</li>
+                    <li>若发现性压抑沸羊羊成群结队冲锋，请玩家自行组织防线提防搞事群。</li>
+                    <li><strong style="color:#c0392b;">使用二次元皮肤并让模型改成裸体会直接永ban处理。</strong></li>
+                    <li>宣传虚假规则将会不开展直接上警告，玩家可举报宣传虚假规则者，需带有录屏然后扣举报，写明谁谁谁。</li>
+                </ul>
+            </div>
+
+            <!-- 内战服专属规则（独立板块） -->
+            <div id="civil-war" class="content-block">
+                <h2>内战服专属规则</h2>
+                <ol class="rule-list" style="list-style: decimal; padding-left: 2rem;">
+                    <li>禁止出生平台打架、招募、抢电梯等行为（出生平台和电梯禁止长时间逗留，优先进入电梯的阵营可以击杀后进来的非友好阵营）。</li>
+                    <li>支援平台上下禁止交火。</li>
+                    <li>禁止通过射击他人来判断是否为己方阵营。</li>
+                    <li>所有阵营需完成阵营任务为优先目标。</li>
+                    <li>猩红开启仪式需除蛇手和scp之外的阵营前往阻止。</li>
+                    <li>禁止向电梯内、支援平台上下和撤离点使用任何爆炸物（不包括闪光弹，混沌分裂者使用pg炸毁直升机或基金会武装使用pg炸毁装甲车是被允许的）。</li>
+                    <li>禁止敌对阵营合作。</li>
+                    <li>当刷新GRU时，斯大林小队编为格鲁乌阵营。</li>
+                </ol>
+            </div>
+
+            <!-- 主要规则（原内容保持不变） -->
             <div id="main" class="content-block active">
                 <h2>主要规则</h2>
                 <p>服务器有自动Demo录制功能且默认开启，设置内可以进行更改<br>
@@ -634,6 +734,11 @@
                     switchTab(tabId);
                 });
             });
+
+            // 默认显示第一个（如果没有任何active，则显示“主要规则”）
+            if (!document.querySelector('.content-block.active')) {
+                switchTab('main');
+            }
 
             // 如果URL中有hash（如 #ci），自动切换到对应板块
             if (window.location.hash) {
