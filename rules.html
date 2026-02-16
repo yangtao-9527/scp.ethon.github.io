@@ -54,13 +54,14 @@
         }
         nav a {
             color: #2c3e50;
-            margin: 0 1rem;
+            margin: 0 0.5rem;
             font-weight: 500;
             padding: 0.5rem 1rem;
             border-radius: 40px;
             transition: all 0.2s;
+            display: inline-block;
         }
-        nav a:hover {
+        nav a:hover, nav a.active {
             background: #e67e22;
             color: white;
         }
@@ -169,15 +170,12 @@
             background: #fff5e6;
             transform: translateX(4px);
         }
-        .vip-price {
-            background: #f0f7ff;
-            border-left: 6px solid #3498db;
+        .rule-list li strong {
+            color: #2c3e50;
         }
-        .notice {
+        .alert {
             background: #fff3cd;
-            border-left: 6px solid #ffc107;
-            padding: 1rem 1.5rem;
-            border-radius: 16px;
+            border-left-color: #ffc107;
             margin-top: 1rem;
         }
         footer {
@@ -252,135 +250,359 @@
     </nav>
 
     <div class="doc-container">
-        <!-- 左侧目录 -->
+        <!-- 左侧目录（所有分类） -->
         <aside class="doc-sidebar">
-            <h3>文档目录</h3>
+            <h3>规则合集</h3>
             <ul>
-                <li><a class="tab-link active" data-tab="intro">新人必读 / 常见问题</a></li>
-                <li><a class="tab-link" data-tab="vip">VIP 相关</a></li>
-                <li><a class="tab-link" data-tab="special">特殊规则</a></li>
-                <li><a class="tab-link" data-tab="civil-war">内战服专属规则</a></li>
-                <li><a class="tab-link" data-tab="rule-changes">规则改动具体信息</a></li>
-                <li><a class="tab-link" data-tab="others">其他重要提醒</a></li>
+                <li><a class="tab-link active" data-tab="main">主要规则</a></li>
+                <li><a class="tab-link" data-tab="report">举报与警告</a></li>
+                <li><a class="tab-link" data-tab="elevator">撤离点、电梯相关</a></li>
+                <li><a class="tab-link" data-tab="dclass">D级人员</a></li>
+                <li><a class="tab-link" data-tab="cotsk">猩红之子 COTSK</a></li>
+                <li><a class="tab-link" data-tab="foundation">基金会</a></li>
+                <li><a class="tab-link" data-tab="ci">混沌分裂者 CI</a></li>
+                <li><a class="tab-link" data-tab="sh">蛇之手 SH</a></li>
+                <li><a class="tab-link" data-tab="scp">异常项目 SCP</a></li>
+                <li><a class="tab-link" data-tab="uiu">联邦调查局所属特异事故处 UIU</a></li>
+                <li><a class="tab-link" data-tab="gru">格鲁乌-P GRU-P</a></li>
+                <li><a class="tab-link" data-tab="platform">支援平台规则</a></li>
+                <li><a class="tab-link" data-tab="ranger">美军游骑兵</a></li>
+                <li><a class="tab-link" data-tab="spark">全球超自然联盟火花塞小队</a></li>
+                <li><a class="tab-link" data-tab="goc">全球超自然联盟 GOC</a></li>
+                <li><a class="tab-link" data-tab="anderson">安德森机器人</a></li>
+                <li><a class="tab-link" data-tab="alpha1">Alpha-1 混沌分裂者</a></li>
             </ul>
         </aside>
 
-        <!-- 右侧内容 -->
+        <!-- 右侧内容（所有区块，已填充规则） -->
         <main class="doc-content">
-            <!-- 新人必读 / 常见问题 -->
-            <div id="intro" class="content-block active">
-                <h2>新人必读 / 常见问题</h2>
-                <ul class="rule-list">
-                    <li><strong>游戏内大量紫黑红色错误/missingmap怎么办？</strong><br>
-                    订阅服务器创意工坊合集：<br>
-                    <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3433592573" target="_blank">合集1</a><br>
-                    <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3432895930" target="_blank">合集2</a><br>
-                    <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=343289593" target="_blank">合集3</a>
-                    </li>
-                    <li><strong>玩过一次之后列表看不见怎么办？</strong><br>
-                    按ESC下面的按键一键打开控制台，输入 <code>connect 202.189.12.153:27015</code> 可以直接连服务器。
-                    </li>
-                    <li><strong>不太了解规则，怕违规怎么办？</strong><br>
-                    规则看这里：<a href="#civil-war" onclick="switchTab('civil-war')">内战服专属规则</a>、<a href="#special" onclick="switchTab('special')">特殊规则</a>等。
-                    </li>
-                    <li><strong>想要反馈一些bug或者是别的东西，刚好技术/服主不在线怎么办？</strong><br>
-                    有意见可按照格式在表格内反馈，会定期查看。
-                    </li>
-                    <li><strong>我完全不会玩，不知道该做什么怎么办？</strong><br>
-                    可以询问游戏内队友或是在群内询问群友，会有热心群友为你解答。
-                    </li>
-                    <li><strong>游戏经常崩溃怎么办？</strong><br>
-                    首先在Steam库内右键你的GMOD，选择属性 → 测试版，切换至 <code>64位</code>。
-                    </li>
-                    <li><strong>总是连接丢失怎么办？</strong><br>
-                    可能有很多问题导致，可以尝试关闭加速器、关闭翻墙软件等尝试解决，如果还不能解决请等待我们给出更好的方案。
-                    </li>
-                </ul>
-                <div class="notice">
-                    <strong>注意事项：</strong> 所有规则、玩家介绍等都有可能会有漏洞，但若有玩家恶意通过钻规则漏洞进行逃避惩罚等论棍或钻牛角尖行为，我们会给予该玩家包括但不限于警告、ban出服务器等惩罚。
+            <!-- 主要规则 -->
+            <div id="main" class="content-block active">
+                <h2>主要规则</h2>
+                <p>服务器有自动Demo录制功能且默认开启，设置内可以进行更改<br>
+                Demo路径: 你的Steam游戏库路径\GarrysMod\garrysmod<br>
+                pgbreach_demo_1.dem<br>
+                pgbreach_demo_2.dem<br>
+                Demo只会保存两个回合，本回合与上一回合，在回合结束与第一次加入游戏时开始新录制<br>
+                如果要播放Demo，请按"~"键打开控制台，然后输入：playdemo pgbreach_demo_1 / 2</p>
+                <div class="rule-list alert">
+                    <li>⚠️ 1. 遇到违规第一时间举报，时间跨度太大且无详细信息 (玩家ID，违规截图，回合Demo 任选一种) 不予受理</li>
+                    <li>2. 满足以上情况依旧拿某人违规说事(翻旧账)按滥用举报和带节奏处理</li>
+                    <li>3. 涉及管理员违规或对处理有异议 且服务器内无其他管理请到群内举报或向服主拉菲私信举报</li>
                 </div>
+                <p>本服服规最终解释权归服主与管理员所有，部分具体问题可能需要进行具体分析处理<br>
+                任何人都不能凌驾于规则之上，如果是管理员服主或技术违规，严惩<br>
+                任何处罚都必须进行开庭审判，管理探讨</p>
+                <p>进入服务器默认知晓并同意遵守以下规则</p>
+                <ul class="rule-list">
+                    <li><strong>1.</strong> 恶意击杀队友（Teamkill TK）</li>
+                    <li><strong>2.</strong> 故意钻规则漏洞 不文明游戏即可上警告</li>
+                    <li><strong>3.</strong> 恶意击杀友军且有证据无法反驳即记一次违规处理</li>
+                    <li><strong>4.</strong> 混战TK队友或队友站到你与对方交火线上属于无意TK，可给受害者与道歉寻求原谅。</li>
+                    <li><strong>5.</strong> 误伤人数过多且未道歉寻求原谅也可记违规处理，违规数量看人数而定（其实也差不多属于专门杀队友了）</li>
+                    <li><strong>6.</strong> 若游戏内卡bug了及时向管理员寻求帮助</li>
+                    <li><strong>7.</strong> 猩红在设施中举行仪式所有阵营除SCP和蛇之手以外必须前往阻止猩红之子仪式</li>
+                    <li><strong>8.</strong> 格鲁乌在设施中开启心灵控制器所有阵营除SCP、蛇之手、安德森机器人和GOC攻击组等以外必须前往关闭格鲁乌心灵控制器</li>
+                    <li><strong>9.</strong> 带有特殊任务阵营（如德尔塔，goc，猩红等）需全力完成任务，若故意不完成任务则视为违规</li>
+                    <li><strong>10.</strong> 广播、观察者与对讲机禁止放音频、骂人（活着放音频警告三次后可击杀） 骂人 放音频如被警告不停止禁言一天外加警告一次</li>
+                    <li><strong>11.</strong> 变声器，音频等不能吵到其他正常游玩的玩家，当过度使用时，玩家可以进行举报。</li>
+                    <li><strong>12.</strong> 钻规则漏洞或引起众怒等故意恶意行为可上警告、封禁</li>
+                    <li><strong>13.</strong> 如果故意捣乱 恶心同阵营玩家 受害者可以警告如继续行为可以击杀</li>
+                    <li><strong>14.</strong> 禁止恶意使用Bug去到非常规位置如击杀别人则杀多少上多少警告（如停机坪旁房顶）</li>
+                    <li><strong>15.</strong> 禁止窥屏狙击他人 违者ban 一天</li>
+                    <li><strong>16.</strong> 禁止猜杀（无明确证据表明对方属于敌对阵营）</li>
+                    <li><strong>17.</strong> 对讲机频道不能作为证据用以击杀套皮或窃皮角色</li>
+                    <li><strong>18.</strong> 不能以任何开局刷新的物品用作证据来击杀他人（例如闪光弹，医疗包，除颤仪等等）</li>
+                    <li><strong>19.</strong> 禁止敌对阵营合作（如故意不攻击）</li>
+                    <li><strong>20.</strong> 禁止死亡记忆（在复活前记忆他人位置/阵营，全服广播不算做死亡记忆）</li>
+                    <li><strong>21.</strong> 禁止长时间逗留在出生平台 </li>
+                    <li><strong>22.</strong> 禁止任何人跳上支援平台</li>
+                    <li><strong>23.</strong> 禁止提前到特殊出生点堵复活的角色（如直升机平台等）</li>
+                    <li><strong>24.</strong> 违规命令：设施主管命令科研禁止接近、禁止穿防化服，让医生出示除颤仪验证身份，菜鸟禁止拿长枪，科研持枪直接击毙 防化服持枪直接击毙</li>
+                    <li><strong>25.</strong> 禁止死后/被诏安后暴露别人身份</li>
+                    <li><strong>26.</strong> 所有间谍在暴露身份前属于伪装阵营，身份暴露后恢复原阵营关系</li>
+                    <li><strong>27.</strong> 能开启012收容间不作为可击杀安德森机器人间谍证据。</li>
+                    <li><strong>28.</strong> 禁止在未穿戴防护服的情况下主动靠近和拾取SCP409让自己被感染（包括被SCP409变成冰雕的尸体）</li>
+                    <li><strong>29.</strong> 自身感染SCP409需立刻告知所有队友远离，自身也不能再主动靠近任何未感染的队友</li>
+                    <li><strong>30.</strong> 禁止使用推人将任何人类阵营角色阵营推死（电梯，电网，悬崖）</li>
+                    <li><strong>31.</strong> 禁止连续开关玻璃门将门卡住</li>
+                    <li><strong>32.</strong> 如因为规则开庭 没有明确的证据 且玩家管理有异议 则管理有权利问询玩家提供demo 如玩家不提供证据则让管理内部投票是否违规</li>
+                    <li><strong>33.</strong> （临时）因地图目前没有完全适配，SCP门可以被直接打开，因此玩家直接开门将被警告</li>
+                    <li><strong>34.</strong> 指挥官拥有指挥权，队员不听命令者警告三次可以击毙(违规命令算无效命令)。</li>
+                    <li><strong>35.</strong> 大范围杀伤武器要使用时必须告知附近队友，告知过后造成的TK不计为违规。</li>
+                    <li><strong>36.</strong> 相同阵营时有人报错误信息导致的TK，TK的人不负责任，而是报此信息的人负责。不同阵营时：误导人/被误导人不承担责任。</li>
+                    <li><strong>37.</strong>  SCP敌对阵营在遇到SCP时可以躲在scp攻击不到的位置 但处于该位置时禁止以各种形式攻击scp（包括但不限于蓄电炮、囚鸟、喝辐射和自爆，手持409等任何能对SCP造成伤害的行为）。</li>
+                </ul>
             </div>
 
-            <!-- VIP 相关 -->
-            <div id="vip" class="content-block">
-                <h2>VIP 相关</h2>
+            <!-- 举报与警告 -->
+            <div id="report" class="content-block">
+                <h2>举报与警告</h2>
                 <ul class="rule-list">
-                    <li class="vip-price"><strong>单次购买：</strong>30元/月</li>
-                    <li class="vip-price"><strong>一次性连续购买超过三个月：</strong>25元/月</li>
+                    <li><strong>1.</strong> 禁止除卡BUG 违规以外滥用举报</li>
+                    <li><strong>2.</strong> 如若有玩家在游戏内或者群内扰乱正常秩序会予以处罚</li>
+                    <li><strong>3.</strong> 玩家发送的举报内容不明确，管理不会对该举报进行受理（如：TK不发送具体击杀信息 “管理我被谁谁谁杀了”等等）</li>
+                    <li><strong>4.</strong> 滥用举报者会受到惩罚（如：管理GOC有人挂机能不能给我补位上去 管理我scp忘记选了之类的）</li>
+                    <li><strong>5.</strong> 如有意违规后逃跑（退游戏）则ban一天时间，已经到法庭后逃跑ban三天时间</li>
+                    <li><strong>6.</strong> 警告每15天消除</li>
                 </ul>
-                <p><strong>VIP目前特殊权限：</strong></p>
+            </div>
+
+            <!-- 撤离点、电梯相关 -->
+            <div id="elevator" class="content-block">
+                <h2>撤离点、电梯相关</h2>
                 <ul class="rule-list">
-                    <li>双倍经验获取</li>
-                    <li>SCP自选</li>
-                    <li>自选名字颜色</li>
-                    <li>DD特殊皮肤</li>
-                    <li>后续仍会添加其他功能，敬请期待</li>
+                    <li><strong>1.</strong> 直升机/装甲车仅允许RPG摧毁（使用如手雷、榴弹炮摧毁违规）</li>
+                    <li><strong>2.</strong> SCP/蛇之手必须走蛇之手传送门撤离除非有下列特殊情况可以走通用：
+                        <ul style="margin-left: 1.5rem; list-style-type: circle;">
+                            <li>猩红王之子开启仪式</li>
+                            <li>GOC开启核弹</li>
+                            <li>被SCP409扎</li>
+                            <li>格鲁乌开启心灵控制器</li>
+                            <li>格鲁乌已成功开启心灵控制器</li>
+                        </ul>
+                    </li>
+                    <li><strong>3.</strong> SCP可以在任何撤离点攻击敌人（但是如果SCP没有成功撤离算违规）</li>
+                    <li><strong>4.</strong> 基金会禁止堵装甲车撤离点</li>
+                    <li><strong>5.</strong> 基金会只有在获取RPG时可以摧毁CI装甲车</li>
+                    <li><strong>6.</strong> 当GOC开启Alpha核弹/奇术打击时，所有基金会武装必须立刻去阻止（已经在地表可直接撤离），非基金会人员可以选择撤离</li>
+                    <li><strong>7.</strong> 通用撤离点与车撤离点不受保护（蛇之手禁止堵通用和车的撤离点）</li>
+                    <li><strong>8.</strong> 禁止在除蛇之手传送门外的撤离点附近使用自爆饮料、辐射饮料、手雷、红冰、弹球等范围性伤害物品及武器</li>
+                    <li><strong>9.</strong> 蛇洞所有人类单位都能堵（除游骑兵和安德森）。</li>
+                    <li><strong>10.</strong> UIU禁止堵蛇之手传送门以外的撤离点</li>
+                    <li><strong>11.</strong> 蛇之手禁止堵所有撤离点</li>
+                    <li><strong>12.</strong> 混沌分裂者可以在装甲车被摧毁后上停机坪堵撤离</li>
+                    <li><strong>13.</strong> 禁止用撤离点的车堵路/堵门</li>
+                    <li><strong>14.</strong> 直接对ABCD大门和各个电梯造成致死的爆炸物 投掷物 scp物品 范围物品(包括008) 都算违规（除清收地下电梯和409电梯）</li>
                 </ul>
-                <p><strong>头衔相关：</strong></p>
+            </div>
+
+            <!-- D级人员 -->
+            <div id="dclass" class="content-block">
+                <h2>D级人员</h2>
                 <ul class="rule-list">
-                    <li>普通单色头衔：25元</li>
-                    <li>特殊自定义头衔：35元</li>
-                    <li>头衔在激活当天不满意可改，一旦激活永久有效。</li>
+                    <li><strong>1.</strong> D级人员会有CI间谍在安保人员中帮助你们（间谍会有描边）</li>
+                    <li><strong>2.</strong> D家牢房为安全区，任何阵营都禁止攻击在牢房中的D级（轻收容放毒后保护失效）</li>
+                    <li><strong>3.</strong> 阵营关系：混沌分裂者 友好 | 其他阵营 中立</li>
                 </ul>
-                <p><strong>特殊自定义头衔：</strong>自定义头衔代表可自定义样式，包括渐变、彩虹、图片等，如果有别的想做的效果也可以和我讨论。</p>
-                <p>示例：</p>
+            </div>
+
+            <!-- 猩红之子COTSK -->
+            <div id="cotsk" class="content-block">
+                <h2>猩红之子 COTSK</h2>
+                <p>所有间谍在暴露身份前属于伪装阵营，身份暴露后恢复原阵营关系</p>
+                <ul class="rule-list">
+                    <li><strong>1.</strong> 当猩红之子紧急疏散任务失败时，可以堵其他阵营撤离</li>
+                </ul>
+                <p>阵营关系：所有阵营 敌对</p>
+            </div>
+
+            <!-- 基金会 -->
+            <div id="foundation" class="content-block">
+                <h2>基金会</h2>
+                <ul class="rule-list">
+                    <li><strong>1.</strong> 除安全主管 中尉 设施主管 内部安全代理外不能无理由直接进入办公广播室，禁止以包括但不限于”设施主管需要保护”等类似理由进入广播室并长期停留。</li>
+                    <li><strong>2.</strong> 基金会武装禁止在广播室外长久逗留，设施主管可以指定两名机动特遣队队员进入广播室驻守。</li>
+                    <li><strong>3.</strong> 基金会武装优先带科研去直升机撤离点撤离，如果未携带 科研人员、医生、道德伦理 其中一个禁止撤离通用撤离点（快反除外）</li>
+                    <li><strong>4.</strong> 工程师禁止在SCP拆不掉的地方部署炮台和禁止使用炮台拥堵SCP唯一的出口</li>
+                    <li><strong>5.</strong> 如GOC开核，所有基金会武装或基金会协助阵营必须去阻止GOC（已经在地表可直接撤离）</li>
+                    <li><strong>6.</strong> 基金会武装需要查验 "科研人员ID"，通过 “SCP道具眼镜”、内部安全代理查验、九尾狐中尉技能,设施内实时面板， 九尾狐狗官扫描，可以不查ID击杀 除以上之外都不算查验证据</li>
+                    <li><strong>7.</strong> 基金会武装禁止在未确认对方身份的情况下击杀对方，若是发现伪装身份需要警告其5秒卸下伪装或发现其有对自己或队友造成威胁(例如伪装者攻击队友)才可击毙，若对方玩家出现不听从警告或逃跑等行为仍可以击杀（防化服默认科研，MTF没有id不用查验身份即可击毙）</li>
+                    <li><strong>8.</strong> D级伪装中使用了不符合职业的技能则即可确认为D可以进行击杀（运动员摆手加速、食人魔吃尸体、杀手掏刀， 道德伦理招安后的白鞋D级除外）（黑客破译工具不算在内）</li>
+                    <li><strong>9.</strong> 穿MTF衣服的D级只有MTF长官单位/基金会支援单位/保安上尉 能命令 出示 "军事ID"</li>
+                    <li><strong>10.</strong> 禁止队员违抗指挥官命令（指挥官警告3次后可击杀）</li>
+                    <li><strong>11.</strong> 基金会武装禁止命令科研丢弃除"枪"“危险性scp物品”外任何物品（如自爆，辐射，球，scp409等）</li>
+                    <li><strong>12.</strong> 九尾狐/律法左手第一任务为营救科研，第二任务为无效化所有SCP以及设施内暴乱敌对人员，若无科研则可前往地表。</li>
+                    <li><strong>13.</strong> 红右手/潘多拉魔盒/落锤第一任务为无效化所有SCP以及设施内暴乱敌对人员，第二任务为营救科研，若设施仍有SCP及未知人员存活则紧急撤离前不允许前往飞机撤离点，若SCP探测员死亡无法确认SCP和未知人员存活状况则营救至少一名科研后前往地表。</li>
+                    <li><strong>14.</strong> 疯帽商任务为开启设施净化系统，在紧急撤离前禁止上地表撤离。</li>
+                    <li><strong>15.</strong> Kondarki角色在红右手刷新前为正常特科阵营关系，刷新后对红右手，猩红，SCP三个阵营敌对，对其他所有阵营均为“互相中立”，可以合作逃离设施。</li>
+                    <li><strong>16.</strong> 基金会武装单位有权命令可疑人员远离79家隔间电脑。</li>
+                    <li><strong>17.</strong> QRT家里面视为支援平台，任何阵营不得在QRT家里击杀QRT（SCP-457除外）。</li>
+                    <li><strong>18.</strong> 疯帽商需前往重收开启三个净化程序后，前往办公区域开启净化装置</li>
+                    <li><strong>19.</strong> 山河志需前往重收点亮七星灯封印设施</li>
+                </ul>
+                <p><strong>阵营关系：</strong></p>
                 <ul style="margin-left: 2rem;">
-                    <li>从来没有觉得写代码开心过</li>
-                    <li>世界第一的AnonTokyo</li>
-                    <li>RiceMCUT</li>
+                    <li>安保人员 | 科研人员 友好 | 无武装D级人员 中立 | 其他阵营/武装D级人员 敌对</li>
+                    <li>MTF/QRT/NTF/红右手 | 科研人员 友好 | 其他阵营 敌对</li>
+                    <li>科研人员 | 基金会武装 友好 | D级人员 中立 | 其他阵营 中立</li>
                 </ul>
+                <p><strong>基金会官职列表：</strong> 红右手/律法左手指挥官——落锤/九尾狐指挥官——各志支援士兵——设施主管——安全主管——机动特遣队 中尉——内部安全代理——安保部门 上尉——机动特遣队 士兵——安保部门 MTF特派——安保部门 督察官——安保部门 中士<br>
+                注：快速反应部队官职与机动特遣队一致，人事主管可查验科研ID</p>
             </div>
 
-            <!-- 特殊规则 -->
-            <div id="special" class="content-block">
-                <h2>特殊规则</h2>
+            <!-- 混沌分裂者 CI -->
+            <div id="ci" class="content-block">
+                <h2>混沌分裂者 CI</h2>
+                <p>所有间谍在暴露身份前属于伪装阵营，身份暴露后恢复原阵营关系</p>
                 <ul class="rule-list">
-                    <li><strong>对管理员：</strong>定制模型只能适用于基金会军事单位使用，使用别的阵营被发现将会被收回使用权。</li>
-                    <li>以后小饭堂服务器不再接受玩家定制。</li>
-                    <li>警惕周围性压抑与拱火群体，他们高概率是伪人。</li>
-                    <li>pg和饭堂依旧是一家人，警惕想搞事的傻逼。</li>
-                    <li>遇到有人拱火且群里明显吵起来请及时呼叫拉菲或者管理，不要问发生什么事了，bro们容易被带偏。</li>
-                    <li>若发现性压抑沸羊羊成群结队冲锋，请玩家自行组织防线提防搞事群。</li>
-                    <li><strong style="color:#c0392b;">使用二次元皮肤并让模型改成裸体会直接永ban处理。</strong></li>
-                    <li>宣传虚假规则将会不开展直接上警告，玩家可举报宣传虚假规则者，需带有录屏然后扣举报，写明谁谁谁。</li>
+                    <li><strong>1.</strong> 禁止混沌分裂者不拯救DD独自撤离 （有恶魔的情况下可以将任务目标变成击毁九尾飞机）</li>
+                    <li><strong>2.</strong> 禁止阔剑部署在其他阵营的复活点内和电梯附近、abcd大门附近</li>
+                    <li><strong>3.</strong> 有恶魔的情况下混沌分裂者只能共两个人（包括rpg持有者）选择去地表击毁飞机任务如违反此条则除rpg持有者外在地表的混沌分裂者上警告</li>
+                    <li><strong>4.</strong> 当德尔塔强袭小队被召唤后，所有混沌分裂者的任务变为协助强袭小队占领设施。</li>
+                    <li><strong>5.</strong> 当设施内刷新德尔塔强袭小队时，混沌分裂者任务更改为协助德尔塔强袭小队完成任务。（持有RPG者，任务为阻止基金会撤离。）</li>
+                    <li><strong>6.</strong> 当GOC开启Alpha核弹/奇术开启时，德尔塔强袭小队和混沌分裂者需前往阻止，当核弹或奇术打击被制止时，需回到设施继续执行任务</li>
+                    <li><strong>7.</strong> 混沌分裂者可以在GOC开启核弹/奇术打击时选择撤离（场上未刷新德尔塔的情况下）</li>
+                    <li><strong>8.</strong> 混沌分裂者可以不择手段阻止基金会撤离（直升机平台安全区内不允许使用范围性武器）。</li>
                 </ul>
+                <p><strong>阵营关系：</strong> D级人员 友好 | UIU,科研,安德森机器人 中立 | 其他阵营 敌对<br>
+                CI间谍在暴露前 对 基金会成员 中立</p>
             </div>
 
-            <!-- 内战服专属规则 -->
-            <div id="civil-war" class="content-block">
-                <h2>内战服专属规则</h2>
-                <ol class="rule-list" style="list-style: decimal; padding-left: 2rem;">
-                    <li>禁止出生平台打架、招募、抢电梯等行为（出生平台和电梯禁止长时间逗留，优先进入电梯的阵营可以击杀后进来的非友好阵营）。</li>
-                    <li>支援平台上下禁止交火。</li>
-                    <li>禁止通过射击他人来判断是否为己方阵营。</li>
-                    <li>所有阵营需完成阵营任务为优先目标。</li>
-                    <li>猩红开启仪式需除蛇手和scp之外的阵营前往阻止。</li>
-                    <li>禁止向电梯内、支援平台上下和撤离点使用任何爆炸物（不包括闪光弹，混沌分裂者使用pg炸毁直升机或基金会武装使用pg炸毁装甲车是被允许的）。</li>
-                    <li>禁止敌对阵营合作。</li>
-                    <li>当刷新GRU时，斯大林小队编为格鲁乌阵营。</li>
-                </ol>
-            </div>
-
-            <!-- 规则改动具体信息 -->
-            <div id="rule-changes" class="content-block">
-                <h2>规则改动具体信息</h2>
+            <!-- 蛇之手 SH -->
+            <div id="sh" class="content-block">
+                <h2>蛇之手 SH</h2>
+                <p>所有间谍在暴露身份前属于伪装阵营，身份暴露后恢复原阵营关系</p>
                 <ul class="rule-list">
-                    <li><strong>2025-02-16：</strong>增加关于裸体皮肤的处罚说明，明确永久封禁。</li>
-                    <li><strong>2025-02-10：</strong>调整VIP模型使用范围，仅限基金会军事单位。</li>
-                    <li><strong>2025-02-01：</strong>明确举报虚假规则的处理流程。</li>
-                    <!-- 可以根据实际补充更多改动 -->
+                    <li><strong>1.</strong> 蛇之手-间谍 会有白色描边</li>
+                    <li><strong>2.</strong> 禁止蛇之手不下设施拯救SCP</li>
+                    <li><strong>3.</strong> SCP和蛇之手唯一的撤离点是蛇之手传送门</li>
+                    <li><strong>4.</strong> 如主要SCP已经死完或者撤离 蛇之手可以走通用撤离点撤离</li>
+                    <li><strong>5.</strong> 禁止SCP和蛇之手无理由逗留小图书馆，否则将会视作违规且直接处死。(任何类似于躲避危险单位或单纯在图书馆内躲藏一段时间均属于无理由逗留)</li>
+                    <li><strong>6.</strong> SCP在奇术打击，核弹开启，心灵控制，猩红祷告，疯帽商开启设施净化（出现净化程序开始3/3）德尔塔强袭小队（任务黑入开始时）允许通用撤离点撤离，除以上情况下，SCP不允许通用撤离，只能进入蛇之手传送门撤离点。 蛇之手在SCP存活时必须走蛇之手传送门撤离点，当确认设施内没有SCP时，可自行撤离。</li>
+                </ul>
+                <p><strong>阵营关系：</strong> SCP 友好 | 其他阵营 敌对<br>
+                蛇之手间谍 对 其他阵营 敌对</p>
+            </div>
+
+            <!-- 异常项目 SCP -->
+            <div id="scp" class="content-block">
+                <h2>异常项目 SCP</h2>
+                <ul class="rule-list">
+                    <li><strong>1.</strong> SCP-682/106允许越狱但禁止给其他队友提前开门</li>
+                    <li><strong>2.</strong> SCP-811禁止在其他阵营的复活点内和电梯附近放置地雷</li>
+                    <li><strong>3.</strong> SCP-106禁止抓电梯里的人</li>
+                    <li><strong>4.</strong> SCP-106禁止抓刚从口袋空间内逃离扔处于起身动作的玩家</li>
+                    <li><strong>5.</strong> SCP禁止帮助除蛇手间谍外人类拾取SCP-035</li>
+                    <li><strong>6.</strong> scp-999可以自行选择是否走O5撤离</li>
+                </ul>
+                <p><strong>阵营关系：</strong> 蛇之手 友好 | 其他阵营 敌对</p>
+                <hr>
+                <h3>特殊SCP</h3>
+                <ul class="rule-list">
+                    <li><strong>SCP-999</strong> 对 其他阵营 中立</li>
+                    <li><strong>SCP-035</strong> 对 D级人员 中立 | 其他阵营 敌对</li>
+                    <li><strong>SCP-912</strong> 对 D级人员/科研 中立 | 其他阵营 敌对</li>
                 </ul>
             </div>
 
-            <!-- 其他重要提醒 -->
-            <div id="others" class="content-block">
-                <h2>其他重要提醒</h2>
+            <!-- 联邦调查局所属特异事故处 UIU -->
+            <div id="uiu" class="content-block">
+                <h2>联邦调查局所属特异事故处 UIU</h2>
+                <p>所有间谍在暴露身份前属于伪装阵营，身份暴露后恢复原阵营关系</p>
                 <ul class="rule-list">
-                    <li>管理团队QQ群：123456789（请备注游戏ID）</li>
-                    <li>申诉或建议请发送邮件至 <a href="mailto:admin@rice.cn">admin@rice.cn</a></li>
-                    <li>请勿在公屏刷屏、骂人、宣传其他服务器。</li>
-                    <li>遇到无法解决的问题，截图保留证据并@在线管理。</li>
+                    <li><strong>1.</strong> UIU任务必须下去骇入电脑 完成任务即可撤离</li>
+                    <li><strong>2.</strong> UIU间谍换装前禁止击杀无武装的科研，近战武器也算武装，SCP-4978-1直接算作武装单位（间谍密令在科研身上除外）</li>
+                    <li><strong>3.</strong> uiu在紧急疏散时可以直接撤离，不用黑完电脑.</li>
+                    <li><strong>4.</strong> uiuspy DD可以进行合作</li>
+                    <li><strong>5.</strong> UIU在设施提前开启核弹时可以撤离设施，若核弹关闭后任务未完成，则需返回设施完成任务</li>
                 </ul>
+                <p><strong>阵营关系：</strong> Grup 敌对 | 其他阵营 中立 | 游骑兵 友好<br>
+                UIU间谍 对 Grup 中立</p>
+            </div>
+
+            <!-- 格鲁乌-P GRU-P -->
+            <div id="gru" class="content-block">
+                <h2>格鲁乌-P GRU-P</h2>
+                <ul class="rule-list">
+                    <li><strong>1.</strong> 格鲁乌阵营任务为进入设施关闭现实稳定锚，并且开启心灵控制器转化设施里心智脆弱的角色</li>
+                    <li><strong>2.</strong> 若紧急撤离则算作格鲁乌任务失败</li>
+                    <li><strong>3.</strong> 格鲁乌任务失败以后可以堵直升机或装甲车撤离点抢夺为自己的撤离点</li>
+                    <li><strong>4.</strong> 格鲁乌成功开启心灵控制器转化角色以后任务改为杀死设施内所有非格鲁乌人员占领设施。</li>
+                </ul>
+                <p><strong>阵营关系：</strong> 科研/D级 中立 其他阵营 敌对</p>
+            </div>
+
+            <!-- 支援平台规则 -->
+            <div id="platform" class="content-block">
+                <h2>支援平台规则</h2>
+                <p>支援平台范围为ABC大门内</p>
+                <ul class="rule-list">
+                    <li><strong>1.</strong> 支援平台上下不允许互相攻击，若支援平台上下属于非同一阵营，则支援平台下面的阵营必须立刻离开支援平台大门内。（此规则仅适用于AB大门）</li>
+                    <li><strong>2.</strong> 支援平台C大门门外的阵营攻击门内的，则认为攻击支援平台，如果门内的攻击门外的，则支援平台保护作废</li>
+                    <li><strong>3.</strong> 若支援从支援电梯出来时大门内没有任何敌对单位且大门为关闭状态则必须立刻从支援平台下到地面</li>
+                    <li><strong>4.</strong> 禁止任何人跳上支援平台</li>
+                    <li><strong>5.</strong> 律法左手指挥官禁止在支援平台对其他人使用技能</li>
+                    <li><strong>6.</strong> 禁止非友好阵营支援走同一个支援电梯，先进入阵营可随意击杀后进入的非友好阵营</li>
+                    <li><strong>7.</strong> 禁止在abc大门内部长时间蹲守支援，长时间蹲守判定为在大门内不走电梯撤离 刻意蹲守具体由管理或者demo判断</li>
+                    <li><strong>8.</strong> 电梯范围性武器保护范围扩大至支援平台，若被范围性武器击杀之后尸体处于ABC大门内，则算电梯使用范围性武器（冰房电梯，轻收地下电梯可以随意使用范围性武器）。</li>
+                </ul>
+                <p><strong>以下为爆炸物保护范围</strong><br>
+                A门：正门第一个小房间以及侧边房间内均为爆炸物保护区<br>
+                B门：包括正门的第一个房间<br>
+                C门：大门内<br>
+                QRT家：QRT家两个门内均为爆炸物保护区</p>
+            </div>
+
+            <!-- 美军游骑兵 -->
+            <div id="ranger" class="content-block">
+                <h2>美军游骑兵</h2>
+                <ul class="rule-list">
+                    <li><strong>1.</strong> 霉菌游骑兵禁止堵任何撤离点。</li>
+                    <li><strong>2.</strong> 若进入正常紧急撤离，则必须立刻撤离。</li>
+                    <li><strong>3.</strong> 若防御系统未黑入，必须优先黑入，不能全部滞留地表，（高官可按需分配兵力），地表提前上去人数不得大于三。</li>
+                    <li><strong>4.</strong> 当发现地表大功率卫星信号时则所有基金会武装立刻前往阻止，其他阵营可以提前撤离。</li>
+                    <li><strong>5.</strong> 霉菌游骑兵必须阻止GRU开启心灵控制和猩红开导，可在GOC开核和奇术打击时选择撤离。</li>
+                    <li><strong>6.</strong> UIU在没有游骑兵时主要任务为黑电脑，在有美军是任务为协助游骑兵封锁设施。</li>
+                    <li><strong>7.</strong> 若在障碍封锁后有人员在通用内部，这些人员第一任务为撤离，不能从内部去攻击路障。</li>
+                    <li><strong>8.</strong> 士兵禁止将围墙放在电梯里，禁止用围墙将SCP的路封死。</li>
+                    <li><strong>9.</strong> 在地表隧道拱门结束靠通用墙面这段距离内，若还存在友军，指挥在此范围内禁止呼叫155mm火炮齐射，仅可选择飞机和120mm系列与155单发，指挥官在呼叫炮击后告知队友炮击的具体地点，若没有告知造成的友军击杀视为TK处理。</li>
+                    <li><strong>10.</strong> UIU间谍在呼叫游骑兵时若有科研靠近将其击杀不算做违规击杀无武装科研。</li>
+                    <li><strong>11.</strong> 机械师要启动无人机时需告知身边队友，否则造成的友军击杀视为TK。</li>
+                    <li><strong>12.</strong> 如果看到手持蝴蝶刀的友方角色，击杀不构成猜杀。</li>
+                    <li><strong>13.</strong> 若卫星开启后在公路刷新的陆军仍处于黑屏状态，其他人不能攻击黑屏状态下的陆军。</li>
+                </ul>
+                <p><strong>开启卫星前</strong><br>
+                阵营关系：其他阵营 敌对 | CI 科研 安德森机器人 中立 | UIU 友好</p>
+                <p><strong>开启卫星后</strong><br>
+                阵营关系：其他阵营 敌对 | 科研 中立 | UIU 友好</p>
+            </div>
+
+            <!-- 全球超自然联盟火花塞小队 -->
+            <div id="spark" class="content-block">
+                <h2>全球超自然联盟 火花塞小队</h2>
+                <p>火花塞阵营需全力帮助基金会收容所有SCP，当SCP全部收容后可自行撤离或留下帮助基金会对抗其他未知等你是<br>
+                当全球超自然联盟 大使 刷新时。全球超自然联盟 间谍 与基金会武装及科研的关系改为中立，在大使死亡后恢复正常阵营关系。<br>
+                当全球超自然联盟 大使 存活时，若刷新goc攻击小组，大使与基金会保持友好<br>
+                当刷新安德森机器人时，火花塞小队与其为敌对</p>
+                <p>‌<br>
+                <strong>阵营关系：</strong> 基金会武装 科研 全球超自然联盟 友好 | 其他阵营 敌对</p>
+            </div>
+
+            <!-- 全球超自然联盟GOC -->
+            <div id="goc" class="content-block">
+                <h2>全球超自然联盟 GOC</h2>
+                <p>所有间谍在暴露身份前属于伪装阵营，身份暴露后恢复原阵营关系</p>
+                <ul class="rule-list">
+                    <li><strong>1.</strong> 当GOC紧急疏散任务失败时，可以堵其他阵营撤离</li>
+                    <li><strong>2.</strong> 当O5核弹开启时，GOC可选择撤离，如O5核弹未开启或被制止，GOC需前往开启核弹</li>
+                </ul>
+                <p>‌<br>
+                <strong>阵营关系：</strong> 安德森机器人 火花塞 友好 | 其他阵营 敌对<br>
+                GOC间谍 对 D级人员 中立（穿上装甲后 敌对）</p>
+            </div>
+
+            <!-- 安德森机器人 -->
+            <div id="anderson" class="content-block">
+                <h2>安德森机器人</h2>
+                <ul class="rule-list">
+                    <li><strong>1.</strong> 阵营目标：营救隶属于公司的产品，销毁有关公司的一切情报并逃离设施</li>
+                    <li><strong>2.</strong> 安德森机器人成员有义务阻止猩红仪式</li>
+                    <li><strong>3.</strong> 安德森机器人势力禁止堵任何撤离点</li>
+                    <li><strong>4.</strong> 当刷新火花塞小队时，安德森机器人与其为敌对</li>
+                </ul>
+                <p><strong>阵营关系：</strong> GOC 友好 | 科研/D级 CI UIU 美军 中立 | 其他阵营 敌对</p>
+            </div>
+
+            <!-- Alpha-1 混沌分裂者 -->
+            <div id="alpha1" class="content-block">
+                <h2>Alpha-1 混沌分裂者</h2>
+                <p>所有间谍在暴露身份前属于伪装阵营，身份暴露后恢复原阵营关系</p>
+                <ul class="rule-list">
+                    <li><strong>1.</strong> 场内刷新Alpha-1混沌分裂者时 CI混沌分裂者和 德尔塔的目标更改为协助Alpha-1（德尔塔可黑入防空系统召唤支援）</li>
+                    <li><strong>2.</strong> 如Alpha-1任务失败，任务目标改为协助德尔塔占领设施；若德尔塔全部阵亡，Alpha-1任务目标改为阻止基金会撤离或可直接撤离</li>
+                </ul>
+                <p><strong>阵营关系：</strong> D级，CI阵营 友好 / 科研 中立 | 其他阵营 敌对</p>
             </div>
         </main>
     </div>
@@ -413,9 +635,9 @@
                 });
             });
 
-            // 如果URL中有hash（如 #civil-war），自动切换到对应板块
+            // 如果URL中有hash（如 #ci），自动切换到对应板块
             if (window.location.hash) {
-                const hash = window.location.hash.substring(1); // 去掉 #
+                const hash = window.location.hash.substring(1);
                 if (document.getElementById(hash)) {
                     switchTab(hash);
                 }
